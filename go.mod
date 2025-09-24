@@ -1,6 +1,6 @@
 module github.com/dweymouth/supersonic
 
-go 1.21.9
+go 1.23.0
 
 require (
 	fyne.io/fyne/v2 v2.6.1
@@ -10,7 +10,7 @@ require (
 	github.com/deluan/sanitize v0.0.0-20230310221930-6e18967d9fc1
 	github.com/dweymouth/fyne-advanced-list v0.0.0-20250211191927-58ea85eec72c
 	github.com/dweymouth/fyne-tooltip v0.3.0
-	github.com/dweymouth/go-jellyfin v0.0.0-20250808023725-196437af15a6
+	github.com/dweymouth/go-jellyfin v0.0.0-20250914000657-c172d6f678bb
 	github.com/go-audio/audio v1.0.0
 	github.com/go-audio/wav v1.1.0
 	github.com/godbus/dbus/v5 v5.1.0
@@ -20,13 +20,13 @@ require (
 	github.com/quarckster/go-mpris-server v1.0.3
 	github.com/supersonic-app/fyne-lyrics v0.0.0-20250614151306-b1880a70a410
 	github.com/supersonic-app/go-mpv v0.1.1-0.20250822102843-7a8cde5f5449
-	github.com/supersonic-app/go-subsonic v0.0.0-20241224013245-9b2841f3711d
+	github.com/supersonic-app/go-subsonic v0.0.0-20250913173646-cf4fceb19b43
 	github.com/supersonic-app/go-upnpcast v0.0.0-20250330154256-b957204209a5
 	github.com/zalando/go-keyring v0.2.6
-	golang.org/x/net v0.35.0
-	golang.org/x/sys v0.30.0
-	golang.org/x/term v0.29.0
-	golang.org/x/text v0.22.0
+	golang.org/x/net v0.38.0
+	golang.org/x/sys v0.31.0
+	golang.org/x/term v0.30.0
+	golang.org/x/text v0.23.0
 )
 
 require (
@@ -70,3 +70,6 @@ require (
 replace fyne.io/fyne/v2 v2.6.1 => github.com/dweymouth/fyne/v2 v2.3.0-rc1.0.20250712002006-5064d705dac4
 
 replace github.com/go-audio/wav v1.1.0 => github.com/dweymouth/go-wav v0.0.0-20250719173115-e60429a83eb0
+
+// fixes https://github.com/dweymouth/supersonic/issues/412 until the fix lands upstream
+replace github.com/go-gl/glfw/v3.3/glfw v0.0.0-20240506104042-037f3cc74f2a => github.com/supersonic-app/go-glfw/v3.3/glfw v0.0.0-20250906235349-c09e5a2f6b75

@@ -25,9 +25,10 @@ type ServerConnection struct {
 
 type ServerConfig struct {
 	ServerConnection
-	ID       uuid.UUID
-	Nickname string
-	Default  bool
+	ID              uuid.UUID
+	Nickname        string
+	Default         bool
+	SelectedLibrary string
 }
 
 type AppConfig struct {
@@ -316,7 +317,7 @@ func (c *Config) WriteConfigFile(filepath string) error {
 	if err != nil {
 		return err
 	}
-	os.WriteFile(filepath, b, 0644)
+	os.WriteFile(filepath, b, 0o644)
 
 	return nil
 }

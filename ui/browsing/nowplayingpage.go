@@ -360,8 +360,10 @@ func (a *NowPlayingPage) updateLyrics() {
 	// set the widget to an empty (not nil) lyric during fetch
 	// to keep it from showing "Lyrics not available"
 	a.lyricsViewer.DisableTapToSeek()
-	a.lyricsViewer.SetLyrics(&mediaprovider.Lyrics{Synced: true,
-		Lines: []mediaprovider.LyricLine{{Text: ""}}})
+	a.lyricsViewer.SetLyrics(&mediaprovider.Lyrics{
+		Synced: true,
+		Lines:  []mediaprovider.LyricLine{{Text: ""}},
+	})
 	tr, _ := a.nowPlaying.(*mediaprovider.Track)
 	go a.fetchLyrics(ctx, tr)
 }
@@ -482,7 +484,6 @@ func (a *NowPlayingPage) OnPlayTimeUpdate(curTime, _ float64, seeked bool) {
 
 func (a *NowPlayingPage) currentTracklistOrNil() *widgets.PlayQueueList {
 	if a.tabs != nil {
-
 		switch a.tabs.SelectedIndex() {
 		case 0: /*queue*/
 			return a.queueList
@@ -556,18 +557,18 @@ func (a *NowPlayingPage) formatStatusLine() {
 			util.SecondsToMMSS(playerStats.TimePos),
 			util.SecondsToMMSS(dur))
 	}
-	status := fmt.Sprintf("%s (%d/%d)%s", state, trackNum,
-		len(a.queue), statusSuffix)
+	status := fmt.Sprintf("%s (%d/%d)%s · %s: %s", state, trackNum,
+		len(a.queue), statusSuffix, lang.L("Total time"), util.SecondsToTimeString(a.totalTime))
 
 	mediaInfo := ""
 	if state != stopped {
 		mediaInfo = a.formatMediaInfoStr(curPlayer)
 	}
 	if mediaInfo != "" {
-		mediaInfo = " · " + mediaInfo
+		mediaInfo = " | " + mediaInfo
 	}
 
-	a.statusLabel.Text = fmt.Sprintf("%s%s | %s: %s", status, mediaInfo, lang.L("Total time"), util.SecondsToTimeString(a.totalTime))
+	a.statusLabel.Text = fmt.Sprintf("%s%s", status, mediaInfo)
 	if lastStatus != a.statusLabel.Text {
 		a.statusLabel.Refresh()
 	}
